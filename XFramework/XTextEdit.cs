@@ -118,7 +118,6 @@ namespace XFramework
         }
 
         [Category("XEditor")]
-        [Description("Sql veri tipini giriniz.")]
         public string XSqlDataType
         {
             get { return this._sqlDataType; }
