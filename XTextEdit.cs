@@ -10,20 +10,21 @@ using DevExpress.XtraEditors.Registrator;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.ViewInfo;
 using DevExpress.XtraEditors.Popup;
+using System.Data;
 
 namespace XFramework
 {
-    [UserRepositoryItem("RegisterXLookUpEdit")]
-    public class RepositoryItemXLookUpEdit : RepositoryItemLookUpEdit
+    [UserRepositoryItem("RegisterXTextEdit")]
+    public class RepositoryItemXTextEdit : RepositoryItemTextEdit
     {
-        static RepositoryItemXLookUpEdit()
+        static RepositoryItemXTextEdit()
         {
-            RegisterXLookUpEdit();
+            RegisterXTextEdit();
         }
 
-        public const string CustomEditName = "XLookUpEdit";
+        public const string CustomEditName = "XTextEdit";
 
-        public RepositoryItemXLookUpEdit()
+        public RepositoryItemXTextEdit()
         {
         }
 
@@ -35,10 +36,10 @@ namespace XFramework
             }
         }
 
-        public static void RegisterXLookUpEdit()
+        public static void RegisterXTextEdit()
         {
             Image img = null;
-            EditorRegistrationInfo.Default.Editors.Add(new EditorClassInfo(CustomEditName, typeof(XLookUpEdit), typeof(RepositoryItemXLookUpEdit), typeof(XLookUpEditViewInfo), new XLookUpEditPainter(), true, img));
+            EditorRegistrationInfo.Default.Editors.Add(new EditorClassInfo(CustomEditName, typeof(XTextEdit), typeof(RepositoryItemXTextEdit), typeof(XTextEditViewInfo), new XTextEditPainter(), true, img));
         }
 
         public override void Assign(RepositoryItem item)
@@ -47,7 +48,7 @@ namespace XFramework
             try
             {
                 base.Assign(item);
-                RepositoryItemXLookUpEdit source = item as RepositoryItemXLookUpEdit;
+                RepositoryItemXTextEdit source = item as RepositoryItemXTextEdit;
                 if (source == null) return;
                 //
             }
@@ -59,29 +60,28 @@ namespace XFramework
     }
 
     [ToolboxItem(true)]
-    public class XLookUpEdit : LookUpEdit
+    public class XTextEdit : TextEdit
     {
         public string _fieldName = "";
         public string _methodName = "";
         public string _sqlDataType = "";
-        public string _primaryField = "";
-        public string _secondaryField = "";
 
-        static XLookUpEdit()
+        static XTextEdit()
         {
-            RepositoryItemXLookUpEdit.RegisterXLookUpEdit();
+            RepositoryItemXTextEdit.RegisterXTextEdit();
         }
 
-        public XLookUpEdit()
+        public XTextEdit()
         {
+           
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public new RepositoryItemXLookUpEdit Properties
+        public new RepositoryItemXTextEdit Properties
         {
             get
             {
-                return base.Properties as RepositoryItemXLookUpEdit;
+                return base.Properties as RepositoryItemXTextEdit;
             }
         }
 
@@ -89,13 +89,8 @@ namespace XFramework
         {
             get
             {
-                return RepositoryItemXLookUpEdit.CustomEditName;
+                return RepositoryItemXTextEdit.CustomEditName;
             }
-        }
-
-        protected override PopupBaseForm CreatePopupForm()
-        {
-            return new XLookUpEditPopupForm(this);
         }
 
         [Category("XEditor")]
@@ -123,7 +118,7 @@ namespace XFramework
         }
 
         [Category("XEditor")]
-        [Description("Sql veri tip adını giriniz.")]
+        [Description("Sql veri tipini giriniz.")]
         public string XSqlDataType
         {
             get { return this._sqlDataType; }
@@ -134,25 +129,20 @@ namespace XFramework
             }
         }
 
+
+
     }
 
-    public class XLookUpEditViewInfo : LookUpEditViewInfo
+    public class XTextEditViewInfo : TextEditViewInfo
     {
-        public XLookUpEditViewInfo(RepositoryItem item) : base(item)
+        public XTextEditViewInfo(RepositoryItem item) : base(item)
         {
         }
     }
 
-    public class XLookUpEditPainter : ButtonEditPainter
+    public class XTextEditPainter : TextEditPainter
     {
-        public XLookUpEditPainter()
-        {
-        }
-    }
-
-    public class XLookUpEditPopupForm : PopupLookUpEditForm
-    {
-        public XLookUpEditPopupForm(XLookUpEdit ownerEdit) : base(ownerEdit)
+        public XTextEditPainter()
         {
         }
     }
